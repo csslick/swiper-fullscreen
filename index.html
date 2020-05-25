@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>JS Bin</title>
+  <!-- 부트스트랩 -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <!-- swiper -->
+  <link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.css">
+
+  <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+  <!-- swiper.js -->
+  <script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    ul { list-style-type: none;}
+    html,
+    body {
+      position: relative;
+      height: 100%;
+      box-sizing: border-box;
+    }
+
+    .swiper-container {
+      width: 100%;
+      height: 100%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .swiper-slide {
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .swiper-slide img {
+      width: 100%;
+    }
+
+    #main_header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 999;
+      background: #ccc;
+      width: 100%;
+      height: 50px;
+    }
+    #gnb ul { 
+      text-align: center;
+    }
+
+    #gnb ul li {
+      display: inline-block;
+      padding-left: 2em;
+      padding-right: 3em;
+    }
+    #gnb ul li a {
+      display: block;
+      line-height: 50px;
+    }
+
+    .swiper-pagination {
+      position: fixed;
+    }
+    section {
+      
+    }
+  </style>
+</head>
+
+<body>
+  <header id="main_header" >
+    <nav id="gnb">
+      <ul>
+        <li><a href="#s1">section1</a></li>
+        <li><a href="#s2">section2</a></li>
+        <li><a href="#s3">section3</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- 전체 컨테이터 -->
+  <div class="swiper-container">
+    <!-- swiper 컨테이너 -->
+    <div class="swiper-wrapper">
+      <!-- 슬라이딩 될 페이지 섹션 영역 -->
+      <section id="s1" class="swiper-slide">
+        <h1>section1</h1>
+      </section>
+      <section id="s2" class="swiper-slide">
+        <h1>section2</h1>
+      </section>
+      <section id="s3" class="swiper-slide">
+        <h1>section3</h1>
+      </section>
+    </div><!-- end swiper-container-->
+    <!-- 페이저 UI -->
+    <div class="swiper-pagination"></div>
+  </div><!-- end slider main -->
+
+  <script>
+    $(document).ready(function () {
+      var swiper = new Swiper('.swiper-container', {
+        direction: 'vertical',
+        slidesPerView: 1,
+        spaceBetween: 30,
+        mousewheel: true,
+        pagination: {
+          el: '.swiper-pagination',
+          clickable: true,
+        },
+      });
+
+      $('#gnb a').on('click', function () {
+        var i = $(this).parent().index();
+        console.log(i);
+        swiper.slideTo(i, 400, function () {
+          console.log('${i}페이지로 이동');
+        });
+        return false;
+      });
+
+    });
+  </script>
+</body>
+
+</html>
