@@ -8,19 +8,16 @@
   <!-- 부트스트랩 -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
   <!-- swiper -->
-  <link 
-    rel="stylesheet" 
-    href="https://unpkg.com/swiper/css/swiper.css"
-    media="screen and (min-width: 501px)"
-  >
-
+  <link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.css" media="screen and (min-width: 501px)">
   <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
   <!-- swiper.js -->
   <script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
   <style>
+    /* CSS Reset */
     * {
-      margin: 0;
+      margin: 0!important;
       padding: 0;
+      box-sizing: border-box;
     }
 
     ul {
@@ -31,34 +28,41 @@
     body {
       position: relative;
       height: 100%;
-      box-sizing: border-box;
+    }
+    body { 
+      /* fixed header 높이만큼 상단 여백 */
+      padding-top: 50px;
     }
 
-    .swiper-container {
-      width: 100%;
-      height: 100%;
-      margin-left: auto;
-      margin-right: auto;
+    /* PC CSS */
+    @media screen and (min-width: 501px) {
+      .swiper-container {
+        width: 100%;
+        height: 100%;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .swiper-slide {
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .swiper-slide img {
+        width: 100%;
+      }
     }
 
-    .swiper-slide {
-      text-align: center;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .swiper-slide img {
-      width: 100%;
-    }
-
+    /* 공통 CSS */
     #main_header {
       position: fixed;
       top: 0;
       left: 0;
       z-index: 999;
-      /* background: #ccc; */
-      background: rgba(0, 0, 0, 0.5);
+      background: #ccc;
+      /* background: rgba(0, 0, 0, 0.5); */
       width: 100%;
       height: 50px;
     }
@@ -82,15 +86,35 @@
       position: fixed;
     }
 
-    section {
-      padding-top: 50px;
+
+    #s1 {
+      background: orange;
     }
 
+    #s2 {
+      background: green;
+    }
+
+    #s3 {
+      background: yellow;
+    }
+
+    /* 모바일 CSS */
     @media screen and (max-width: 500px) {
-      section {
-        width: 100%;
-        height: 100vh;
+      #gnb ul li {
+        margin: 0;
+        padding: 0;
+        width: 33.33%;
+        float: left;
+        height: 50px;
       }
+
+      #gnb ul li a {
+        border: 1px solid red;
+      }
+
+      section { height: 400px;}
+
     }
   </style>
 </head>
@@ -144,9 +168,9 @@
       });
 
       // 스와이퍼 구동부
-      var swiper = null; 
+      var swiper = null;
       var enableSwiper = function () {
-          swiper = new Swiper('.swiper-container', {
+        swiper = new Swiper('.swiper-container', {
           direction: 'vertical',
           slidesPerView: 1,
           spaceBetween: 30,
