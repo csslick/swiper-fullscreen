@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
-  <title>Swiper Slider</title>
+  <title>JS Bin</title>
   <!-- 부트스트랩 -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
   <!-- swiper -->
@@ -18,7 +18,11 @@
       margin: 0;
       padding: 0;
     }
-    ul { list-style-type: none;}
+
+    ul {
+      list-style-type: none;
+    }
+
     html,
     body {
       position: relative;
@@ -49,11 +53,13 @@
       top: 0;
       left: 0;
       z-index: 999;
-      background: #ccc;
+      /* background: #ccc; */
+      background: rgba(0, 0, 0, 0.5);
       width: 100%;
       height: 50px;
     }
-    #gnb ul { 
+
+    #gnb ul {
       text-align: center;
     }
 
@@ -62,6 +68,7 @@
       padding-left: 2em;
       padding-right: 3em;
     }
+
     #gnb ul li a {
       display: block;
       line-height: 50px;
@@ -70,14 +77,15 @@
     .swiper-pagination {
       position: fixed;
     }
+
     section {
-      
+      padding-top: 50px;
     }
   </style>
 </head>
 
 <body>
-  <header id="main_header" >
+  <header id="main_header">
     <nav id="gnb">
       <ul>
         <li><a href="#s1">section1</a></li>
@@ -108,27 +116,55 @@
 
   <script>
     $(document).ready(function () {
-      var swiper = new Swiper('.swiper-container', {
-        direction: 'vertical',
-        slidesPerView: 1,
-        spaceBetween: 30,
-        mousewheel: true,
-        pagination: {
-          el: '.swiper-pagination',
-          clickable: true,
-        },
+      // 디바이스 크기 채크
+      function check_device() {
+        var x = document.getElementById("demo");
+        if (window.matchMedia("(max-width: 500px)").matches) {
+          console.log("디바이스 크기가 500px보다 작거나 같습니다");
+          diableSwiper(); // 스와이프 작동
+        } else {
+          console.log("디바이스카 500px보다 큽니다.");
+          enableSwiper(); // 스와이프 작동 해제
+        }
+      }
+
+      window.addEventListener('resize', function () {
+        check_device();
       });
 
-      $('#gnb a').on('click', function () {
-        var i = $(this).parent().index();
-        console.log(i);
-        swiper.slideTo(i, 400, function () {
-          console.log('${i}페이지로 이동');
+      // 스와이퍼 구동부
+      var swiper = null; 
+      var enableSwiper = function () {
+          swiper = new Swiper('.swiper-container', {
+          direction: 'vertical',
+          slidesPerView: 1,
+          spaceBetween: 30,
+          mousewheel: true,
+          pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+          },
         });
-        return false;
-      });
 
-    });
+        // gnb 이벤트
+        $('#gnb a').on('click', function () {
+          var i = $(this).parent().index();
+          console.log(i);
+          swiper.slideTo(i, 400, function () {
+            console.log('${i}페이지로 이동');
+          });
+          return false;
+        });
+      } // end enableSwiper
+
+      var diableSwiper = function () {
+        swiper.destroy(true, true);
+        $('#gnb a').off(); // 이벤트 제거
+      }
+
+      enableSwiper();
+
+    }); // end $
   </script>
 </body>
 
