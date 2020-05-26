@@ -4,11 +4,15 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
-  <title>JS Bin</title>
+  <title>Swiper Full-screen Responsive</title>
   <!-- 부트스트랩 -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
   <!-- swiper -->
-  <link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.css">
+  <link 
+    rel="stylesheet" 
+    href="https://unpkg.com/swiper/css/swiper.css"
+    media="screen and (min-width: 501px)"
+  >
 
   <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
   <!-- swiper.js -->
@@ -80,6 +84,13 @@
 
     section {
       padding-top: 50px;
+    }
+
+    @media screen and (max-width: 500px) {
+      section {
+        width: 100%;
+        height: 100vh;
+      }
     }
   </style>
 </head>
@@ -163,6 +174,7 @@
       }
 
       enableSwiper();
+      check_device();
 
     }); // end $
   </script>
