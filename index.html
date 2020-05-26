@@ -9,117 +9,21 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
   <!-- swiper -->
   <link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.css" media="screen and (min-width: 501px)">
+
+  <!-- 공통 CSS -->
+  <link rel="stylesheet" href="./css/common.css">
+  <!-- PC CSS -->
+  <link rel="stylesheet" href="./css/pc.css" media="screen and (min-width: 501px)">
+  <!-- 모바일 CSS -->
+  <link rel="stylesheet" href="./css/mobile.css" media="screen and (max-width: 500px)">
+
+  <!-- 제이쿼리 -->
   <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
   <!-- swiper.js -->
   <script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
-  <style>
-    /* CSS Reset */
-    * {
-      margin: 0!important;
-      padding: 0;
-      box-sizing: border-box;
-    }
+  <!-- 사용자 자바스크립트 -->
+  <script src="./js/main.js"></script>
 
-    ul {
-      list-style-type: none;
-    }
-
-    html,
-    body {
-      position: relative;
-      height: 100%;
-    }
-    body { 
-      /* fixed header 높이만큼 상단 여백 */
-      /* padding-top: 50px; */
-    }
-
-    /* 공통 CSS */
-    #main_header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      z-index: 999;
-      background: #ccc;
-      /* background: rgba(0, 0, 0, 0.5); */
-      width: 100%;
-      height: 50px;
-    }
-
-    #gnb ul {
-      text-align: center;
-    }
-
-    #gnb ul li {
-      display: inline-block;
-      padding-left: 2em;
-      padding-right: 3em;
-    }
-
-    #gnb ul li a {
-      display: block;
-      line-height: 50px;
-    }
-
-    .swiper-pagination {
-      position: fixed;
-    }
-
-    section { padding-top: 50px;}
-    #s1 {
-      background: orange;
-    }
-
-    #s2 {
-      background: green;
-    }
-
-    #s3 {
-      background: yellow;
-    }
-
-
-    /* PC CSS */
-    @media screen and (min-width: 501px) {
-      .swiper-container {
-        width: 100%;
-        height: 100%;
-        margin-left: auto;
-        margin-right: auto;
-      }
-
-      .swiper-slide {
-        text-align: center;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
-
-      .swiper-slide img {
-        width: 100%;
-      }
-      .swiper-pagination-bullet{ margin-bottom: 6px !important;} 
-      .swiper-pagination-bullet-active{}
-    }
-
-    /* 모바일 CSS */
-    @media screen and (max-width: 500px) {
-      #gnb ul li {
-        margin: 0;
-        padding: 0;
-        width: 33.33%;
-        float: left;
-        height: 50px;
-      }
-
-      #gnb ul li a {
-        border: 1px solid red;
-      }
-
-      section { height: 400px;}
-
-    }
-  </style>
 </head>
 
 <body>
@@ -138,7 +42,7 @@
     <!-- swiper 컨테이너 -->
     <div class="swiper-wrapper">
       <!-- 슬라이딩 될 페이지 섹션 영역 -->
-      <section id="s1" class="swiper-slide">
+      <section id="s1" class="swiper-slide header-top-mg">
         <h1>section1</h1>
       </section>
       <section id="s2" class="swiper-slide">
@@ -152,62 +56,6 @@
     <div class="swiper-pagination"></div>
   </div><!-- end slider main -->
 
-  <script>
-    $(document).ready(function () {
-      // 디바이스 크기 채크
-      function check_device() {
-        var x = document.getElementById("demo");
-        if (window.matchMedia("(max-width: 500px)").matches) {
-          console.log("디바이스 크기가 500px보다 작거나 같습니다");
-          if(swiper){
-            diableSwiper(); // 스와이프 작동 해재
-            location.reload();
-          }
-        } else {
-          console.log("디바이스카 500px보다 큽니다.");
-          enableSwiper(); // 스와이프 작동
-        }
-      }
-
-      window.addEventListener('resize', function () {
-        check_device();
-      });
-
-      // 스와이퍼 구동부
-      var swiper = null;
-      var enableSwiper = function () {
-        swiper = new Swiper('.swiper-container', {
-          direction: 'vertical',
-          slidesPerView: 1,
-          mousewheel: true,
-          pagination: {
-            el: '.swiper-pagination',
-            clickable: true,
-          },
-        });
-
-        // gnb 이벤트
-        $('#gnb a').on('click', function () {
-          var i = $(this).parent().index();
-          console.log(i);
-          swiper.slideTo(i, 400, function () {
-            console.log('${i}페이지로 이동');
-          });
-          return false;
-        });
-      } // end enableSwiper
-
-      var diableSwiper = function () {
-        swiper.destroy();
-        console.log('swiper = ', swiper)
-        $('#gnb a').off(); // 이벤트 제거
-      }
-
-      // enableSwiper();
-      check_device();
-
-    }); // end $
-  </script>
 </body>
 
 </html>

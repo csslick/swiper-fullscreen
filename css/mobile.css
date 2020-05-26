@@ -1,0 +1,16 @@
+/* 모바일 CSS */
+
+#gnb ul li {
+  margin: 0;
+  padding: 0;
+  width: 33.33%;
+  float: left;
+  height: 50px;
+}
+
+#gnb ul li a {
+  border: 1px solid red;
+}
+
+section { height: 400px;}
+
