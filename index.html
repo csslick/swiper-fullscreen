@@ -31,28 +31,7 @@
     }
     body { 
       /* fixed header 높이만큼 상단 여백 */
-      padding-top: 50px;
-    }
-
-    /* PC CSS */
-    @media screen and (min-width: 501px) {
-      .swiper-container {
-        width: 100%;
-        height: 100%;
-        margin-left: auto;
-        margin-right: auto;
-      }
-
-      .swiper-slide {
-        text-align: center;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
-
-      .swiper-slide img {
-        width: 100%;
-      }
+      /* padding-top: 50px; */
     }
 
     /* 공통 CSS */
@@ -86,7 +65,7 @@
       position: fixed;
     }
 
-
+    section { padding-top: 50px;}
     #s1 {
       background: orange;
     }
@@ -97,6 +76,30 @@
 
     #s3 {
       background: yellow;
+    }
+
+
+    /* PC CSS */
+    @media screen and (min-width: 501px) {
+      .swiper-container {
+        width: 100%;
+        height: 100%;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .swiper-slide {
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .swiper-slide img {
+        width: 100%;
+      }
+      .swiper-pagination-bullet{ margin-bottom: 6px !important;} 
+      .swiper-pagination-bullet-active{}
     }
 
     /* 모바일 CSS */
@@ -156,10 +159,13 @@
         var x = document.getElementById("demo");
         if (window.matchMedia("(max-width: 500px)").matches) {
           console.log("디바이스 크기가 500px보다 작거나 같습니다");
-          diableSwiper(); // 스와이프 작동
+          if(swiper){
+            diableSwiper(); // 스와이프 작동 해재
+            location.reload();
+          }
         } else {
           console.log("디바이스카 500px보다 큽니다.");
-          enableSwiper(); // 스와이프 작동 해제
+          enableSwiper(); // 스와이프 작동
         }
       }
 
@@ -173,7 +179,6 @@
         swiper = new Swiper('.swiper-container', {
           direction: 'vertical',
           slidesPerView: 1,
-          spaceBetween: 30,
           mousewheel: true,
           pagination: {
             el: '.swiper-pagination',
@@ -193,11 +198,12 @@
       } // end enableSwiper
 
       var diableSwiper = function () {
-        swiper.destroy(true, true);
+        swiper.destroy();
+        console.log('swiper = ', swiper)
         $('#gnb a').off(); // 이벤트 제거
       }
 
-      enableSwiper();
+      // enableSwiper();
       check_device();
 
     }); // end $
